@@ -1,12 +1,11 @@
 import React from 'react';
-
 import './App.css';
-import LoginForm from './login-form/login';
+import ListUser from './list-user';
 
-function App() {
+var App = () => {
   return (
     <div className="App">
-      <LoginForm />
+      <ListUser />
     </div>
   );
 }
