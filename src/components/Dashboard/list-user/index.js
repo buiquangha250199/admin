@@ -9,6 +9,7 @@ var ListUser = () => {
     const [userList, setUserList] = useState([]);  
     const [page, setPage] = useState(DEFAULT_PAGE);
     const [num, setNum] = useState(DEFAULT_NUMBER); 
+    const TOKEN = localStorage.getItem('token');
 
     let previousClickEvent = () => {
         if(page > 0) setPage(page - 1);
@@ -23,7 +24,7 @@ var ListUser = () => {
             limit: num
         }, 
         headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyOCIsImV4cCI6MTU4NDYwMjQ2NSwiaWF0IjoxNTg0NTg0NDY1fQ.BNZuAAUm3KmiCeBvIWvg6ugYGcwuk9kDu4qgDSImu5yNGWqGmmGS5XOQZRaeNfZrFe8rUV2-yY1udKxHrGz1-A'
+            Authorization: 'Bearer ' + TOKEN
         }
         }).then(function (response) {
             setUserList(response.data.data);
@@ -33,20 +34,23 @@ var ListUser = () => {
             console.log(error);
         })
     
-    }, [page, num]);    
-
-    console.log(userList);
+    }, [page, num, TOKEN]);    
 
     return (
 
-        <div>
+
+        <div className="list-user">
+
+            <div className="title">
+                <h2>List User</h2>
+                <p>Total: {userList.length}</p>
+            </div>
+            
             <table className="table table-hover table-sm">
             <thead>
                 <tr className="table-info">
-                    <th scope="col">#</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Default Campaign</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,10 +58,8 @@ var ListUser = () => {
                     userList.map((user, index) => {
                         return (
                             <tr key={index}>    
-                                <td>{user.id}</td>
                                 <td className="email">{user.username}</td>
                                 <td>{user.email}</td>
-                                <td>{user.defaultCampaign}</td>
                             </tr>
                             )
                     })
@@ -67,8 +69,8 @@ var ListUser = () => {
         </table>
 
         <div className='control-table row'>
-            <div className='col-md-6'>
-                <div className="input-group mb-3">
+            <div className='col-6'>
+                <div className="input-group mb-3 left">
                     <div className="input-group-prepend" >
                         <button className="btn btn-outline-primary" type="button" onClick={() => previousClickEvent()}>Previous</button>
                         <button className="btn btn-outline-primary" type="button" onClick={() => setPage(page+1)}>Next</button>
@@ -81,8 +83,8 @@ var ListUser = () => {
                 </div>
             </div>
 
-            <div className='col-md-4 offset-md-2'>
-            <div className="input-group mb-3">
+            <div className='col-4 offset-2'>
+            <div className="input-group mb-3 right">
                 <input type="number" min='0' className="form-control user-per-page" value={num} onChange={(e) => setNum(e.target.value)} placeholder=" User per page"  />
                 <div className="input-group-append">
                     <span className="input-group-text">User per page</span>

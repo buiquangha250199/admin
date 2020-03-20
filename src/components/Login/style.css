@@ -1,0 +1,21 @@
+.login-form {
+    padding: 45px 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  }
+  
+  header.title {
+    margin-bottom: 20px;
+    color: #145682;
+    font-size: 25px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: serif;
+  }
+  
+  .create-account-link {
+    margin-top: 25px;
+  }
