@@ -42,68 +42,55 @@ var ListRecord = () => {
 
     return (
 
-
-        <div className="list-record">
-            <div className="title">
-                <h2>List Record</h2>
-                <p>Total: {totalRecord}</p>
-            </div>
-            
-            <table className="table table-hover table-sm">
+    <div className="bg-white border-transparent rounded-lg shadow-lg">
+    <div className="bg-gray-400 border-b-2 border-gray-500 rounded-tl-lg rounded-tr-lg p-2">
+        <h5 className="font-bold uppercase text-gray-600">Records</h5>
+    </div>
+    <div className="p-5">
+        <table className="w-full p-5 text-gray-700">
             <thead>
-                <tr className="table-info">
-                    <th scope="col-2">Short link</th>
-                    <th scope="col-4">Title</th>
-                    <th scope="col-4">Description</th>
-                    <th scope="col-2">Campaign</th>
+                <tr>
+                    <th className="text-left text-blue-900">Short Link</th>
+                    <th className="text-left text-blue-900">Title</th>
+                    <th className="text-left text-blue-900">Description</th>
+                    <th className="text-left text-blue-900">Campaign</th>
                 </tr>
             </thead>
+
             <tbody>
-                {
-                    recordList.map((record, index) => {
-                        return (
-                            <tr key={index}>    
-                                <td >{record.shortLink}</td>
-                                <td >{record.title}</td>
-                                <td>{record.description}</td>
-                                <td>{record.campaign}</td>
-                            </tr>
-                            )
-                    })
-                }
-                
+            {
+                  recordList.map((record, index) => {
+                    return (
+                        <tr key={index}>    
+                            <td className='border-b px-4 py-2 border-gray-400'>{record.shortLink}</td>
+                            <td className='border-b px-4 py-2 border-gray-400'>{record.title}</td>
+                            <td className='border-b px-4 py-2 border-gray-400'>{record.description}</td>
+                            <td className='border-b px-4 py-2 border-gray-400'>{record.campaign}</td>
+                        </tr>
+                        )
+                })
+            }
             </tbody>
         </table>
 
-        <div className='control-table row'>
-            <div className='col-md-6'>
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend" >
-                        <button className="btn btn-outline-primary" type="button" onClick={() => previousClickEvent()}>Previous</button>
-                        <button className="btn btn-outline-primary" type="button" onClick={() => setPage(page+1)}>Next</button>
-                    </div>
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" >Page Number</span>
-                    </div>
-                    <input type="number" min='0' className="form-control input-number" value={page} placeholder="0" onChange={ e => setPage(e.target.value)}/>
-                    {console.log(page)}
-                </div>
+        <div className="inline-flex my-5 w-full justify-center">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l border-r"
+                        onClick={() => previousClickEvent()}>
+                    Prev
+                </button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r border-l"
+                        onClick={() => setPage( Number(page)+1 )}>
+                    Next
+                </button>
+                <input type='number' className='border w-20 bg-grey-300 hover:bg-gray-400 px-2 mr-2 ml-2 text-sm' placeholder='Page Number' 
+                       min='0' value={page} onChange={ e => setPage(e.target.value)} />
+                <input type='number' className='border w-20 bg-grey-300 hover:bg-gray-400 px-2 mr-2 text-sm' placeholder='User' 
+                       min='0' onChange={(e) => setNum(e.target.value)}/>
             </div>
-
-            <div className='col-md-4 offset-md-2'>
-            <div className="input-group mb-3">
-                <input type="number" min='0' className="form-control user-per-page" value={num} onChange={(e) => setNum(e.target.value)} placeholder=" User per page"  />
-                <div className="input-group-append">
-                    <span className="input-group-text">Record per page</span>
-                </div>
-                </div>
-            </div>
-        </div>
-
-                
-        
 
     </div>
+</div>
+
     );
 
 }

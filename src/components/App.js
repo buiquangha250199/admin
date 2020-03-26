@@ -1,32 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
+import AppContext from './AppContext';
+import {renderRoutes} from 'react-router-config';
+import LoadingScreen from '../common/LoadingScreen';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
- 
-import LoginForm from './Login/login';
-import Dashboard from './Dashboard/dashboard';
 
-var App = () => {
+
+const App = ({route}) => {
+
+  const TOKEN = localStorage.getItem('token');
+  const [loading, setLoading] = useState(false);
 
   return (
-    <Router>
+    <AppContext.Provider value={{loading, setLoading}}>
       <div className="App">
-        <Switch>
-        <Route exact path="/">
-            <LoginForm />
-        </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route exact path="/login">
-            <LoginForm />
-        </Route>
-        </Switch>
+        {renderRoutes(route.routes)}
       </div>
-    </Router>
+      {loading && <LoadingScreen/>}
+    </AppContext.Provider> 
+    
   );
 }
 
